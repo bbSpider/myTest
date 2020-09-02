@@ -1,0 +1,5 @@
+com\tmm\test\mapper\StudentMapper.class
+com\tmm\test\service\StudentService.class
+com\tmm\test\controller\StudentController.class
+com\tmm\test\entity\Student.class
+com\tmm\test\service\impl\StudentServiceIml.class

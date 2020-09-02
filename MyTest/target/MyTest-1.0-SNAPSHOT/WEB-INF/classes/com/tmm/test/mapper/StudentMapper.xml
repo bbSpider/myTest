@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmm.test.mapper.StudentMapper">
+
+    <resultMap id="BaseResultMap" type="com.tmm.test.entity.Student">
+        <!--字段-->
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="age" jdbcType="INTEGER" property="age" />
+    </resultMap>
+
+    <parameterMap type="com.tmm.test.entity.Student" id="StudentMap">
+        <parameter  property="name" resultMap="BaseResultMap"/>
+        <parameter  property="age" resultMap="BaseResultMap"/>
+    </parameterMap>
+
+    <sql id="Base_Column_List">
+          id,name,age
+    </sql>
+
+    <!--查询所有-->
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from student
+    </select>
+
+    <!--通过id查找-->
+    <select id="findById" resultType="com.tmm.test.entity.Student">
+       select
+        <include refid="Base_Column_List" />
+       from student where id =#{id}
+    </select>
+
+    <!--删除-->
+    <delete id="delete" parameterType="int">
+        delete from student where id =#{id}
+    </delete>
+
+    <!--修改-->
+    <update id="update" parameterMap="StudentMap">
+        update student set name=#{name},age=#{age} where id=#{id}
+    </update>
+
+    <!--新增-->
+    <insert id="insert"  parameterMap="StudentMap">
+        insert into student(name,age) values(#{name},#{age})
+    </insert>
+
+</mapper>
